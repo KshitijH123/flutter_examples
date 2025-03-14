@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "api_future_builder",
+            "cwd": "api_future_builder",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "api_future_builder (profile mode)",
+            "cwd": "api_future_builder",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "api_future_builder (release mode)",
+            "cwd": "api_future_builder",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
