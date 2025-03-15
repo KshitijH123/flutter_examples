@@ -11,18 +11,10 @@
             "type": "dart"
         },
         {
-            "name": "api_future_builder (profile mode)",
-            "cwd": "api_future_builder",
+            "name": "todo_hive",
+            "cwd": "todo_hive",
             "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "api_future_builder (release mode)",
-            "cwd": "api_future_builder",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
+            "type": "dart"
         }
     ]
 }
