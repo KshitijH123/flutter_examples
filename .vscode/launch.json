@@ -21,6 +21,11 @@
             "cwd": "recipe_app",
             "request": "launch",
             "type": "dart"
+        },{
+            "name": "navigator_app",
+            "cwd": "navigator_app",
+            "request": "launch",
+            "type": "dart"
         }
     ]
 }
