@@ -23,17 +23,22 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Recipes')),
-      body: FutureBuilder<List<RecipeModel>>(
+      body: FutureBuilder(
         future: recipeFuture,
         builder: (context, snapshot) {
-          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.data == null) {
             return const Center(child: Text('No recipes available.'));
           } else {
             final recipes = snapshot.data!;
+
             return ListView.builder(
               itemCount: recipes.length,
               itemBuilder: (context, index) {
                 final recipe = recipes[index];
+                
                 return Card(
                   child: ListTile(
                     leading: Image.network(
@@ -43,13 +48,11 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
                       fit: BoxFit.cover,
                     ),
                     title: Text(recipe.name),
-                    subtitle: Text('Ingredients: ${recipe.ingredients.length}'),
+                    subtitle: Text(' ${recipe.cuisine} -${recipe.difficulty}'),
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder:
-                              (context) =>
-                                  RecipeDetail(recipe:recipe),
+                          builder: (context) => RecipeDetail(recipe: recipe),
                         ),
                       );
                     },
