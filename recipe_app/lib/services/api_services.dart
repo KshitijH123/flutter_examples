@@ -12,7 +12,7 @@ class ApiServices {
   Future<List<RecipeModel>> fetchRecipes() async {
     try {
       final response = await http.get(Uri.parse(recipeUrl));
-      
+
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         final List<dynamic> recipesJson = data['recipes'];
@@ -22,6 +22,6 @@ class ApiServices {
       }
     } catch (e) {
       throw Exception('Error fetching recipes: $e');
-    }
+    } 
   }
 }

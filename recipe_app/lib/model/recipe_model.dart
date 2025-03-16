@@ -7,6 +7,7 @@ class RecipeModel {
   final String cuisine;
   final double rating;
   final int reviewCount;
+  final String difficulty;
 
   const RecipeModel({
     required this.id,
@@ -17,6 +18,7 @@ class RecipeModel {
     required this.cuisine,
     required this.rating,
     required this.reviewCount,
+    required this.difficulty,
   });
 
   factory RecipeModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class RecipeModel {
       cuisine: json['cuisine'],
       rating: (json['rating'] as num).toDouble(),
       reviewCount: json['reviewCount'],
+      difficulty: json['difficulty'],
     );
   }
 }
