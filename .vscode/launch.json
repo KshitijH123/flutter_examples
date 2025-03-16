@@ -27,6 +27,12 @@
             "cwd": "navigator_app",
             "request": "launch",
             "type": "dart"
+        },
+        {
+            "name": "user_app",
+            "cwd": "user_app",
+            "request": "launch",
+            "type": "dart"
         }
     ]
 }

@@ -7,16 +7,22 @@ class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Second Screen'),
-      ),
+      appBar: AppBar(title: const Text('Second Screen')),
       body: Center(
         child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => ThirdScreen()));
-          }, child: Text("Next Page", style: TextStyle(fontSize: 18)),
+          onPressed: () async {
+            final result = await Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ThirdScreen()),
+            );
+
+            if (result != null && result is String) {
+              Navigator.pop(
+                context,
+                result,
+              ); 
+            }
+          },
+          child: const Text("Next Page", style: TextStyle(fontSize: 18)),
         ),
       ),
     );
