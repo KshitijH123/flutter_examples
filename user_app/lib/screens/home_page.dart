@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     futureUsers = ApiSevice.instance.fetchUsers();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,14 +51,44 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-  body: FutureBuilder<List<User>>(
-    future: futureUsers,
-    builder: (context,snapshot){
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        
-      }
-    }
-    )
+      body: FutureBuilder<List<User>>(
+        future: futureUsers,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('No User Found'));
+          }
+
+          final users = snapshot.data!;
+
+          return ListView.builder(
+            itemCount: users.length,
+            itemBuilder: (context, index) {
+              final user = users[index];
+
+              return Card(
+                margin: EdgeInsets.all(10),
+                child: ListTile(
+                  title: Text(
+                    user.firstName,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Gender: ${user.gender}'),
+                      Text('Birth Date: ${user.birthDate}'),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
