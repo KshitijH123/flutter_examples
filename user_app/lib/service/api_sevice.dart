@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import '../model/loggedin_user_model.dart';
 import '../model/user_list.dart';
 

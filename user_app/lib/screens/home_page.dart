@@ -12,6 +12,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Future<List<User>> futureUsers;
+  
+  get user => null;
 
   @override
   void initState() {
@@ -41,12 +43,8 @@ class _HomePageState extends State<HomePage> {
                   "Profile",
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                 ),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => UserDetails()),
-                  );
-                },
               ),
+              
             ],
           ),
         ),
@@ -72,9 +70,14 @@ class _HomePageState extends State<HomePage> {
               return Card(
                 margin: EdgeInsets.all(10),
                 child: ListTile(
+                  leading: Image.network(user.image, fit: BoxFit.cover),
                   title: Text(
                     user.firstName,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueAccent,
+                    ),
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,6 +86,11 @@ class _HomePageState extends State<HomePage> {
                       Text('Birth Date: ${user.birthDate}'),
                     ],
                   ),
+                  onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => UserDetails(user:user)),
+                  );
+                },
                 ),
               );
             },
