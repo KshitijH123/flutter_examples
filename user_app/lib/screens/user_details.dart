@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:user_app/model/user_list.dart';
+import 'package:user_app/model/loggedin_user_model.dart';
 
 class UserDetails extends StatelessWidget {
   const UserDetails({super.key, required this.user});
 
-  final User user;
+  final LogedInUser user;
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +26,13 @@ class UserDetails extends StatelessWidget {
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
              const SizedBox(height: 4),
-             Text('• Birth Date: ${user.birthDate}',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
+             Text('• Birth Date: ${user.username}',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
              const SizedBox(height: 4,),
-             Text('• Age : ${user.age.toString()}',style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+             Text('• Age : ${user.email.toString()}',style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
              const SizedBox(height: 4),
              Text('• Genger : ${user.gender}',style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
              const SizedBox(height: 4),
-             Text("• PassWord : ${user.password}",style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700))
+             Text("• PassWord : ${user.gender}",style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700))
           ],
         ),
       ),

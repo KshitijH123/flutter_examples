@@ -5,7 +5,6 @@ import 'package:user_app/service/api_sevice.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -13,7 +12,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  
 
   void login({required String username, required String password}) async {
     final logedInUser = await ApiSevice.instance.loginUser(
@@ -24,12 +23,22 @@ class _LoginPageState extends State<LoginPage> {
     if (logedInUser != null) {
       Navigator.of(
         context,
-      ).push(MaterialPageRoute(builder: (context) => HomePage()));
+      ).push(MaterialPageRoute(builder: (context) => HomePage(user: logedInUser,)));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login Failed, please try again'),
-        backgroundColor: Colors.redAccent,
-        ),
+      showDialog(
+        context: context,
+        builder:
+            (context) => AlertDialog(
+              title: Text('Login Failed'),
+              content: Text('Please try again'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }, child: const Text('OK'),
+                ),
+              ],
+            ),
       );
     }
   }
