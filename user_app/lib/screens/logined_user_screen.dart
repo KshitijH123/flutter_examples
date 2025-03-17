@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:user_app/model/loggedin_user_model.dart';
 
-class LoginUserScreen extends StatelessWidget {
-  const LoginUserScreen({super.key,required this.logedInUser});
+class LoginedUserScreen extends StatelessWidget {
+  const LoginedUserScreen({super.key,required this.logedInUser});
 
    final LogedInUser logedInUser;
 

@@ -10,9 +10,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   void login({required String username, required String password}) async {
     final logedInUser = await ApiSevice.instance.loginUser(
@@ -21,9 +20,9 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     if (logedInUser != null) {
-      Navigator.of(
-        context,
-      ).push(MaterialPageRoute(builder: (context) => HomePage(user: logedInUser,)));
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => HomePage(user: logedInUser)),
+      );
     } else {
       showDialog(
         context: context,
@@ -35,7 +34,8 @@ class _LoginPageState extends State<LoginPage> {
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
-                  }, child: const Text('OK'),
+                  },
+                  child: const Text('OK'),
                 ),
               ],
             ),

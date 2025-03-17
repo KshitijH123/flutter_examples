@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:user_app/model/loggedin_user_model.dart';
 import 'package:user_app/model/user_list.dart';
+import 'package:user_app/screens/logined_user_screen.dart';
 import 'package:user_app/screens/user_details.dart';
 import 'package:user_app/service/api_sevice.dart';
 
 class HomePage extends StatefulWidget {
-    final LogedInUser user; 
+  final LogedInUser user;
+
   const HomePage({super.key, required this.user});
 
   @override
@@ -14,8 +16,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Future<List<User>> futureUsers;
-  
- 
 
   @override
   void initState() {
@@ -45,15 +45,18 @@ class _HomePageState extends State<HomePage> {
                   "Profile",
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                 ),
-                   onTap: () {
+                onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => UserDetails(user: widget.user),
+                      builder:
+                          (context) => LoginedUserScreen(
+                            logedInUser:
+                                widget.user,
+                          ),
                     ),
                   );
                 },
               ),
-              
             ],
           ),
         ),
@@ -96,10 +99,13 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => UserDetails(user:widget.user)),
-                  );
-                },
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder:
+                            (context) => UserDetails(user: user),
+                      ),
+                    );
+                  },
                 ),
               );
             },
