@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StudentMarksScreen extends StatefulWidget {
-  StudentMarksScreen({super.key});
+  const StudentMarksScreen({super.key});
 
   @override
   State<StudentMarksScreen> createState() => _StudentMarksScreenState();
@@ -15,13 +15,29 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
   final scienceController = TextEditingController();
   final historyController = TextEditingController();
 
+  void saveStudentData() {
+    if (studentNameController.text.isEmpty) return;
+
+    final studentData = {
+      'name': studentNameController.text,
+      'marks': {
+        'marathi': marathiController.text,
+        'hindi': hindiController.text,
+        'english': englishController.text,
+        'science': scienceController.text,
+        'history': historyController.text,
+      },
+    };
+    Navigator.pop(context, studentData);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Students Marks',
-          style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
         ),
         backgroundColor: Colors.lightBlueAccent,
       ),
@@ -47,10 +63,13 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
               SizedBox(height: 30),
               Center(
                 child: ElevatedButton(
-                  onPressed:(){
-                  
-                }, child: Text('Save',style: TextStyle(fontSize: 24,fontWeight: FontWeight.w400),),),
-              )
+                  onPressed: saveStudentData,
+                  child: Text(
+                    'Save',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
