@@ -15,6 +15,20 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
   final scienceController = TextEditingController();
   final historyController = TextEditingController();
 
+  int totalMarks = 0;
+
+  void calculateTotal() {
+    int marathi = int.tryParse(marathiController.text) ?? 0;
+    int hindi = int.tryParse(hindiController.text) ?? 0;
+    int english = int.tryParse(englishController.text) ?? 0;
+    int science = int.tryParse(scienceController.text) ?? 0;
+    int history = int.tryParse(historyController.text) ?? 0;
+
+    setState(() {
+      totalMarks = marathi + hindi + english + science + history;
+    });
+  }
+
   void saveStudentData() {
     if (studentNameController.text.isEmpty) return;
 
@@ -26,6 +40,7 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
         'english': englishController.text,
         'science': scienceController.text,
         'history': historyController.text,
+        'total': totalMarks.toString(),
       },
     };
     Navigator.pop(context, studentData);
@@ -60,6 +75,11 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
               buildSubjectRow('• English', englishController),
               buildSubjectRow('• Science', scienceController),
               buildSubjectRow('• History', historyController),
+              SizedBox(height: 20),
+              Text(
+                'Total: $totalMarks',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: 30),
               Center(
                 child: ElevatedButton(
@@ -90,6 +110,7 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
               controller: controller,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(border: OutlineInputBorder()),
+              onChanged: (value) => calculateTotal(),
             ),
           ),
         ],
