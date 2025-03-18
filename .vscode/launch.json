@@ -33,6 +33,12 @@
             "cwd": "user_app",
             "request": "launch",
             "type": "dart"
+        },
+        {
+            "name": "student_app",
+            "cwd": "student_app",
+            "request": "launch",
+            "type": "dart"
         }
     ]
 }

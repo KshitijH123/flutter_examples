@@ -33,7 +33,7 @@ class UserDetails extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '• Email: ${user.password}',
+              '• Age: ${user.age}',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 4),
@@ -48,7 +48,7 @@ class UserDetails extends StatelessWidget {
             ),
              const SizedBox(height: 4),
             Text(
-              '• Pass Word: ${user.password}',
+              '• Password: ${user.password}',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
             ),
           ],

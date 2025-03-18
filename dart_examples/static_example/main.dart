@@ -3,7 +3,9 @@ void main() {
   Recipe.contry = 'india';
   final recipe2 = Recipe(name: 'Misal Pav', source: 'Kolhapur');
 
+  recipe1.cook();
   recipe2.cook();
+
 
   print(Recipe.contry);
 }
@@ -15,9 +17,7 @@ class Recipe {
 
   Recipe({required this.name, required this.source});
 
-  void cook() {
-    ///Code
-  }
+  void cook() {}
 
   static throwDish() {}
 }
