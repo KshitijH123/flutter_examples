@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_app/model/students_model.dart';
 
 class StudentMarksScreen extends StatefulWidget {
   const StudentMarksScreen({super.key});
@@ -30,20 +31,32 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
   }
 
   void saveStudentData() {
-    if (studentNameController.text.isEmpty) return;
+    if (studentNameController.text.isEmpty ||
+        marathiController.text.isEmpty ||
+        hindiController.text.isEmpty ||
+        englishController.text.isEmpty ||
+        scienceController.text.isEmpty ||
+        historyController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('All fields are required!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
 
-    final studentData = {
-      'name': studentNameController.text,
-      'marks': {
-        'marathi': marathiController.text,
-        'hindi': hindiController.text,
-        'english': englishController.text,
-        'science': scienceController.text,
-        'history': historyController.text,
-        'total': totalMarks.toString(),
-      },
-    };
-    Navigator.pop(context, studentData);
+    final student = StudentsModel(
+      name: studentNameController.text.trim(),
+      marathiMarks: int.parse(marathiController.text.trim()),
+      hindiMarks: int.parse(hindiController.text.trim()),
+      englishMarks: int.parse(englishController.text.trim()),
+      scienceMarks: int.parse(scienceController.text.trim()),
+      historyMarks: int.parse(historyController.text.trim()),
+      
+    );
+
+    Navigator.pop(context, student);
   }
 
   @override

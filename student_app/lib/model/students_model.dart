@@ -1,5 +1,5 @@
 class StudentsModel {
-  final int id;
+  final int? id;
   final String name;
   final int marathiMarks;
   final int hindiMarks;
@@ -8,7 +8,7 @@ class StudentsModel {
   final int historyMarks;
 
   StudentsModel({
-    required this.id,
+    this.id,
     required this.name,
     required this.marathiMarks,
     required this.hindiMarks,
@@ -16,15 +16,41 @@ class StudentsModel {
     required this.scienceMarks,
     required this.historyMarks,
   });
-  // factory StudentsModel.fromJson(Map<String, dynamic> json) {
-  //   return StudentsModel(
-  //     id: json['id'],
-  //     name: json['name'],
-  //     marathiMarks: json['marathiMarks'],
-  //     hindiMarks: json['hindiMarks'],
-  //     englishMarks: json['englishMarks'],
-  //     scienceMarks: json['englishMarks'],
-  //     historyMarks: json['historyMarks'],
-  //   );
-  // }
+
+  int totalMarks() {
+    return marathiMarks + hindiMarks + englishMarks + scienceMarks + hindiMarks;
+  }
+
+  factory StudentsModel.fromJson(Map<String, dynamic> json) {
+    return StudentsModel(
+      name: json[StudentsModelKey.name],
+      marathiMarks: json[StudentsModelKey.marathiMarks],
+      hindiMarks: json[StudentsModelKey.hindiMarks],
+      englishMarks: json[StudentsModelKey.englishMarks],
+      scienceMarks: json[StudentsModelKey.scienceMarks],
+      historyMarks: json[StudentsModelKey.historyMarks],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      StudentsModelKey.id: id,
+      StudentsModelKey.name: name,
+      StudentsModelKey.marathiMarks: marathiMarks,
+      StudentsModelKey.hindiMarks: hindiMarks,
+      StudentsModelKey.englishMarks: englishMarks,
+      StudentsModelKey.scienceMarks: scienceMarks,
+      StudentsModelKey.historyMarks: historyMarks,
+    };
+  }
+}
+
+class StudentsModelKey {
+  static const id = 'id';
+  static const name = 'name';
+  static const marathiMarks = 'marathiMarks';
+  static const hindiMarks = 'hindiMarks';
+  static const englishMarks = 'englishMarks';
+  static const scienceMarks = 'scienceMarks';
+  static const historyMarks = 'historyMarks';
 }

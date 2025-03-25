@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_app/model/students_model.dart';
 import 'package:student_app/student_marks_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Map<String, dynamic>> studentsData = [];
+  List<StudentsModel> students = [];
 
   Future<void> navigateToStudentScreen() async {
     final result = await Navigator.push(
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (result != null && mounted) {
       setState(() {
-        studentsData.add(result);
+        students.add(result);
       });
     }
   }
@@ -29,36 +30,36 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Student App (${studentsData.length})',
+          'Students Score ',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
         ),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body:
-          studentsData.isEmpty
+          students.isEmpty
               ? Center(
                 child: Text('No Student Data', style: TextStyle(fontSize: 20)),
               )
               : Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ListView.builder(
-                  itemCount: studentsData.length,
+                  itemCount: students.length,
                   itemBuilder: (context, index) {
-                    final student = studentsData[index];
+                    final student = students[index];
                     return Card(
                       elevation: 4,
                       margin: EdgeInsets.symmetric(vertical: 8),
                       child: ListTile(
                         contentPadding: EdgeInsets.all(14.0),
                         title: Text(
-                          'Name: ${student['name']}',
+                          'Name: ${student.name}',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         subtitle: Text(
-                          'Total: ${student['marks']['total']}',
+                          'Total: ${student.totalMarks()}',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -68,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: Icon(Icons.delete, color: Colors.red),
                           onPressed: () {
                             setState(() {
-                              studentsData.removeAt(index);
+                              students.removeAt(index);
                             });
                           },
                         ),
@@ -78,9 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.person_add),
         backgroundColor: Colors.lightBlueAccent,
         onPressed: navigateToStudentScreen,
+        child: Icon(Icons.person_add),
       ),
     );
   }

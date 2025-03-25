@@ -39,6 +39,13 @@
             "cwd": "student_app",
             "request": "launch",
             "type": "dart"
+        },
+        {
+            "name": "student_sqlite",
+            "cwd": "student_app",
+            "request": "launch",
+            "type": "dart"
         }
+        
     ]
 }
