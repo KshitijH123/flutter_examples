@@ -27,6 +27,25 @@
             "cwd": "navigator_app",
             "request": "launch",
             "type": "dart"
+        },
+        {
+            "name": "user_app",
+            "cwd": "user_app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "student_app",
+            "cwd": "student_app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "student_sqlite",
+            "cwd": "student_app",
+            "request": "launch",
+            "type": "dart"
         }
+        
     ]
 }
