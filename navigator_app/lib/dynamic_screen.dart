@@ -12,14 +12,6 @@ class DynamicTextScreen extends StatefulWidget {
 }
 
 class _DynamicTextScreenState extends State<DynamicTextScreen> {
-  String displayedText = '';
-
-  @override
-  void initState() {
-    super.initState();
-    displayedText = widget.text;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,21 +21,15 @@ class _DynamicTextScreenState extends State<DynamicTextScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              displayedText,
+              widget.text, 
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () async {
-                final result = await Navigator.of(context).push(
+              onPressed: () {
+                Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const SecondScreen()),
                 );
-
-                if (result != null && result is String) {
-                  setState(() {
-                    displayedText = result;
-                  });
-                }
               },
               child: const Text("Next Page", style: TextStyle(fontSize: 18)),
             ),
@@ -53,4 +39,3 @@ class _DynamicTextScreenState extends State<DynamicTextScreen> {
     );
   }
 }
-

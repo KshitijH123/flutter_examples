@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_app/dynamic_screen.dart';
 
 class ThirdScreen extends StatefulWidget {
   const ThirdScreen({super.key});
@@ -10,10 +11,16 @@ class ThirdScreen extends StatefulWidget {
 class _ThirdScreenState extends State<ThirdScreen> {
   final TextEditingController _controller = TextEditingController();
 
-  void _popToDynamicScreen() {
+  void _navigateToDynamicTextScreen() {
     String enteredText = _controller.text;
+
     if (enteredText.isNotEmpty) {
-      Navigator.pop(context, enteredText); 
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DynamicTextScreen(text: enteredText),
+        ),
+      );
     }
   }
 
@@ -35,8 +42,8 @@ class _ThirdScreenState extends State<ThirdScreen> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: _popToDynamicScreen,
-              child: const Text('SUBMIT', style: TextStyle(fontSize: 18)),
+              onPressed: _navigateToDynamicTextScreen,
+              child: const Text('SUBMIT', style: TextStyle(fontSize: 18),),
             ),
           ],
         ),
@@ -44,4 +51,3 @@ class _ThirdScreenState extends State<ThirdScreen> {
     );
   }
 }
-
