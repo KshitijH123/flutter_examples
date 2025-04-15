@@ -33,6 +33,12 @@
             "cwd": "navigator_app",
             "request": "launch",
             "type": "dart"
+        },
+        {
+            "name": "product_catalog",
+            "cwd": "navigator_app",
+            "request": "launch",
+            "type": "dart"
         }
     ]
 }
