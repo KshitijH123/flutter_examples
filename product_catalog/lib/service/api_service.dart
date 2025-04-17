@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../model/product_model.dart';
+import 'package:product_catalog/model/product_model.dart';
 
 class ApiService {
   final String apiUrl = "https://dummyjson.com/products";
