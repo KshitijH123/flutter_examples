@@ -10,6 +10,12 @@ class Product {
   final String? category;
   final String? thumbnail;
   final List<String> images;
+  final String? sku;
+  final double? weight;
+  final Dimensions? dimensions;
+  final String? warrantyInformation;
+  final String? shippingInformation;
+  final String? returnPolicy;
 
   Product({
     required this.id,
@@ -23,6 +29,12 @@ class Product {
     this.category,
     this.thumbnail,
     required this.images,
+    this.sku,
+    this.weight,
+    this.dimensions,
+    this.warrantyInformation,
+    this.shippingInformation,
+    this.returnPolicy,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -38,6 +50,12 @@ class Product {
       category: json['category'],
       thumbnail: json['thumbnail'],
       images: List<String>.from(json['images'] ?? []),
+      sku: json['sku'],
+      weight:(json['weight'] != null) ? (json['weight'] as num).toDouble() : null,
+      dimensions:json['dimensions'],
+      warrantyInformation: json['warrantyInformation'],
+      shippingInformation: json['shippingInformation'],
+      returnPolicy: json['returnPolicy'],
     );
   }
 
@@ -45,4 +63,23 @@ class Product {
     if (discountPercentage == 0) return price;
     return price / (1 - discountPercentage / 100);
   }
+}
+
+class Dimensions {
+  final double width;
+  final double height;
+  final double depth;
+
+  Dimensions({required this.width, required this.height, required this.depth});
+
+  factory Dimensions.fromJson(Map<String, dynamic> json) {
+    return Dimensions(
+      width: (json['width'] ?? 0).toDouble(),
+      height: (json['height'] ?? 0).toDouble(),
+      depth: (json['depth'] ?? 0).toDouble(),
+    );
+  }
+
+  @override
+  String toString() => '$width" x $height" x $depth"';
 }

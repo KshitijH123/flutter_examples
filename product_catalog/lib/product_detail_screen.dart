@@ -151,9 +151,53 @@ class ProductDetailScreen extends StatelessWidget {
                     );
                   }).toList(),
             ),
+
+            const SizedBox(height: 16),
+
+            const Text(
+              "Product Information",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+
+            Table(
+              children: [
+                _buildTableRow("SKU", product.sku),
+                _buildTableRow("Category", product.category),
+                _buildTableRow("Stock", "${product.stock} units"),
+                _buildTableRow("Weight","${product.weight} oz"),
+                _buildTableRow("Dimensions", product.dimensions?.toString()),
+                _buildTableRow("Warranty", product.warrantyInformation),
+                _buildTableRow("Shipping", product.shippingInformation),
+                _buildTableRow("Return Policy", product.returnPolicy),
+              ],
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+TableRow _buildTableRow(String label, String? value) {
+  return TableRow(
+    children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+            ),
+            Text(
+              value ?? "-",
+              style: const TextStyle(fontSize: 14, color: Colors.black87),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
 }
