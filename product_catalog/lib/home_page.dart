@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
- Widget _buildProductCard(Product product) {
+  Widget _buildProductCard(Product product) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     const SizedBox(height: 6),
-                   Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -236,5 +236,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 }

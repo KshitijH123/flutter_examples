@@ -172,6 +172,10 @@ class ProductDetailScreen extends StatelessWidget {
                 _buildTableRow("Return Policy", product.returnPolicy),
               ],
             ),
+           const SizedBox(height: 12),
+             Text('Reviews',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            )
           ],
         ),
       ),

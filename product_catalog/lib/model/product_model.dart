@@ -51,13 +51,18 @@ class Product {
       thumbnail: json['thumbnail'],
       images: List<String>.from(json['images'] ?? []),
       sku: json['sku'],
-      weight:(json['weight'] != null) ? (json['weight'] as num).toDouble() : null,
-      dimensions:json['dimensions'],
+      weight:
+          (json['weight'] != null) ? (json['weight'] as num).toDouble() : null,
+      dimensions:
+          json['dimensions'] != null
+              ? Dimensions.fromJson(json['dimensions'])
+              : null,
       warrantyInformation: json['warrantyInformation'],
       shippingInformation: json['shippingInformation'],
       returnPolicy: json['returnPolicy'],
     );
   }
+
 
   double get originalPrice {
     if (discountPercentage == 0) return price;
@@ -83,3 +88,4 @@ class Dimensions {
   @override
   String toString() => '$width" x $height" x $depth"';
 }
+
