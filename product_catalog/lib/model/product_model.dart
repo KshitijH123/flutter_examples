@@ -40,4 +40,9 @@ class Product {
       images: List<String>.from(json['images'] ?? []),
     );
   }
+
+  double get originalPrice {
+    if (discountPercentage == 0) return price;
+    return price / (1 - discountPercentage / 100);
+  }
 }

@@ -14,11 +14,8 @@ class ApiService {
         final List productsJson = jsonData['products'];
 
         return productsJson.map((item) => Product.fromJson(item)).toList();
-      } else {
-        throw Exception('Failed to load products: ${response.statusCode}');
       }
-    } catch (e) {
-      throw Exception('Error fetching data: $e');
-    }
+    } catch (e) {}
+    return [];
   }
 }

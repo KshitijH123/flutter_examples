@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:product_catalog/home_screen.dart';
+import 'package:product_catalog/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home:  HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
