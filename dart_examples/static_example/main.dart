@@ -15,8 +15,6 @@ class Recipe {
   Recipe({required this.name, required this.source});
 
   void cook() {
-    ///Code
   }
-
   static throwDish() {}
 }
