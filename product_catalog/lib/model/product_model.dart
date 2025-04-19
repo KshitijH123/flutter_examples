@@ -88,4 +88,25 @@ class Dimensions {
   @override
   String toString() => '$width" x $height" x $depth"';
 }
+class Review {
+  final String reviewerName;
+  final int rating;
+  final String comment;
+  final DateTime date;
 
+  Review({
+    required this.reviewerName,
+    required this.rating,
+    required this.comment,
+    required this.date,
+  });
+  factory Review.fromJson(Map<String, dynamic> json) {
+    return Review(
+      reviewerName: json['reviewerName'],
+      rating: json['rating'] ?? 0,
+      comment: json['comment'] ?? '',
+      date: DateTime.now(), 
+    );
+  }
+
+}
