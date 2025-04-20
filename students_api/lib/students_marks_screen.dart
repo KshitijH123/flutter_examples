@@ -17,7 +17,7 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
   final scienceController = TextEditingController();
   final historyController = TextEditingController();
 
-  final StudentService _studentService = StudentService(); // <-- Instance
+  final StudentService _studentService = StudentService();
 
   int totalMarks = 0;
   double percentage = 0.0;
