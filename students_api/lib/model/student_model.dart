@@ -42,6 +42,7 @@ class StudentsModel {
 
   factory StudentsModel.fromJson(Map<String, dynamic> json) {
     return StudentsModel(
+      id: json[StudentsModelKey.id],
       name: json[StudentsModelKey.name],
       marathiMarks: json[StudentsModelKey.marathiMarks],
       hindiMarks: json[StudentsModelKey.hindiMarks],

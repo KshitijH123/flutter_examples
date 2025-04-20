@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:students_api/model/student_model.dart';
+import 'package:students_api/service/api_service.dart';
 import 'package:students_api/students_detail_screen.dart';
 import 'package:students_api/students_marks_screen.dart';
 
@@ -140,17 +141,81 @@ class _HomeScreenState extends State<HomeScreen> {
                                       );
                                     },
                                   ),
-                                  IconButton(
+                                 IconButton(
                                     icon: const Icon(
                                       Icons.delete,
                                       color: Colors.red,
                                     ),
-                                    onPressed: () {
-                                      setState(() {
-                                        students.removeAt(index);
-                                      });
+                                    onPressed: () async {
+                                      final shouldDelete = await showDialog<
+                                        bool
+                                      >(
+                                        context: context,
+                                        builder:
+                                            (context) => AlertDialog(
+                                              title: const Text(
+                                                'Delete Student',
+                                              ),
+                                              content: const Text(
+                                                'Are you sure you want to delete this student?',
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed:
+                                                      () => Navigator.pop(
+                                                        context,
+                                                        false,
+                                                      ),
+                                                  child: const Text('Cancel'),
+                                                ),
+                                                TextButton(
+                                                  onPressed:
+                                                      () => Navigator.pop(
+                                                        context,
+                                                        true,
+                                                      ),
+                                                  child: const Text(
+                                                    'Delete',
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                      );
+
+                                      if (shouldDelete ?? false) {
+                  final success = await StudentService()
+                                            .deleteStudent(student.id!);
+
+
+                                        if (success && mounted) {
+                                          setState(() {
+                                            students.removeAt(index);
+                                          });
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            const SnackBar(
+                                              content: Text('Student deleted'),
+                                            ),
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                'Failed to delete student',
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      }
                                     },
                                   ),
+
                                 ],
                               ),
                             ),

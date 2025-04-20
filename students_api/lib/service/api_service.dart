@@ -17,8 +17,24 @@ class StudentService {
         return [];
       }
     } catch (e) {
-      print('Error fetching students: $e');
-      return [];
+      }
+    return [];
+  }
+   Future<bool> deleteStudent(int id) async {
+    try {
+      final response = await http.delete(Uri.parse('$baseUrl/students/$id'));
+
+      if (response.statusCode == 200) {
+        print('Student deleted successfully.');
+        return true;
+      } else {
+        print('Failed to delete student. Status code: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      print('Error deleting student: $e');
+      return false;
     }
   }
 }
+
