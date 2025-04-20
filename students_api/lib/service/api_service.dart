@@ -17,10 +17,12 @@ class StudentService {
         return [];
       }
     } catch (e) {
-      }
-    return [];
+      print('Error fetching students: $e');
+      return [];
+    }
   }
-   Future<bool> deleteStudent(int id) async {
+
+  Future<bool> deleteStudent(int id) async {
     try {
       final response = await http.delete(Uri.parse('$baseUrl/students/$id'));
 
@@ -32,9 +34,28 @@ class StudentService {
         return false;
       }
     } catch (e) {
-      print('Error deleting student: $e');
       return false;
     }
   }
-}
 
+  Future<StudentsModel?> addStudent(StudentsModel student) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/add-student'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(student.toJson()),
+      );
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+        print('Student added successfully.');
+        return StudentsModel.fromJson(jsonResponse);
+      } else {
+        print('Failed to add student. Status code: ${response.statusCode}');
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+}
