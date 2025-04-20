@@ -14,6 +14,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<StudentsModel> students = [];
 
+  @override
+  void initState() {
+    super.initState();
+    loadStudents();
+  }
+
+  Future<void> loadStudents() async {
+    final data = await StudentService().fetchStudents();
+    setState(() {
+      students = data;
+      students.sort((a, b) => b.percentage().compareTo(a.percentage()));
+    });
+  }
+
   Future<void> navigateToStudentScreen() async {
     final result = await Navigator.push(
       context,
@@ -89,13 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           final student = students[index];
                           return Card(
                             elevation: 5,
-                            margin: const EdgeInsets.symmetric(
-                              vertical: 5,
-                            ), 
+                            margin: const EdgeInsets.symmetric(vertical: 5),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                10,
-                              ), 
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: ListTile(
                               leading: Text(
@@ -129,8 +139,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Icons.edit,
                                       color: Colors.blue,
                                     ),
-                                    onPressed: () {
-                                      Navigator.push(
+                                    onPressed: () async {
+                                      final updated = await Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder:
@@ -139,14 +149,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                         ),
                                       );
+                                      if (updated != null) {
+                                        setState(() {
+                                          students[index] = updated;
+                                          students.sort(
+                                            (a, b) => b.percentage().compareTo(
+                                              a.percentage(),
+                                            ),
+                                          );
+                                        });
+                                      }
                                     },
                                   ),
-                                 IconButton(
+                                  IconButton(
                                     icon: const Icon(
                                       Icons.delete,
                                       color: Colors.red,
                                     ),
                                     onPressed: () async {
+                                      if (student.id == null) {
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          const SnackBar(
+                                            content: Text('Invalid student ID'),
+                                          ),
+                                        );
+                                        return;
+                                      }
+
                                       final shouldDelete = await showDialog<
                                         bool
                                       >(
@@ -156,8 +187,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               title: const Text(
                                                 'Delete Student',
                                               ),
-                                              content: const Text(
-                                                'Are you sure you want to delete this student?',
+                                              content: Text(
+                                                'Are you sure you want to delete ${student.name}?',
                                               ),
                                               actions: [
                                                 TextButton(
@@ -185,10 +216,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                       );
 
-                                      if (shouldDelete ?? false) {
-                  final success = await StudentService()
+                                      if (shouldDelete == true) {
+                                        final success = await StudentService()
                                             .deleteStudent(student.id!);
-
 
                                         if (success && mounted) {
                                           setState(() {
@@ -197,8 +227,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ScaffoldMessenger.of(
                                             context,
                                           ).showSnackBar(
-                                            const SnackBar(
-                                              content: Text('Student deleted'),
+                                            SnackBar(
+                                              content: Text(
+                                                '${student.name} deleted',
+                                              ),
                                             ),
                                           );
                                         } else {
@@ -215,7 +247,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       }
                                     },
                                   ),
-
                                 ],
                               ),
                             ),
