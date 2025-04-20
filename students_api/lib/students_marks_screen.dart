@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:students_api/model/student_model.dart';
+import 'package:students_api/service/api_service.dart';
 
 class StudentMarksScreen extends StatefulWidget {
   const StudentMarksScreen({super.key});
@@ -16,9 +17,11 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
   final scienceController = TextEditingController();
   final historyController = TextEditingController();
 
+  final StudentService _studentService = StudentService(); // <-- Instance
+
   int totalMarks = 0;
   double percentage = 0.0;
-  String result = 'Pass'; // Default result
+  String result = 'Pass';
 
   void calculateTotal() {
     int marathi = int.tryParse(marathiController.text) ?? 0;
@@ -31,7 +34,6 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
       totalMarks = marathi + hindi + english + science + history;
       percentage = (totalMarks / 500) * 100;
 
-      // Check if any subject has marks less than 35
       result =
           (marathi < 35 ||
                   hindi < 35 ||
@@ -39,11 +41,11 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
                   science < 35 ||
                   history < 35)
               ? 'Fail'
-              : 'Pass'; // If any subject < 35, result is Fail
+              : 'Pass';
     });
   }
 
-  void saveStudentData() {
+  void saveStudentData() async {
     if (studentNameController.text.isEmpty ||
         marathiController.text.isEmpty ||
         hindiController.text.isEmpty ||
@@ -68,7 +70,24 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
       historyMarks: int.parse(historyController.text.trim()),
     );
 
-    Navigator.pop(context, student);
+    final addedStudent = await _studentService.addStudent(student);
+
+    if (addedStudent != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Student added successfully!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+      Navigator.pop(context, addedStudent);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to add student.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   @override
@@ -119,7 +138,7 @@ class _StudentMarksScreenState extends State<StudentMarksScreen> {
               ),
               const SizedBox(height: 10),
               Text(
-                'Result: $result', 
+                'Result: $result',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
