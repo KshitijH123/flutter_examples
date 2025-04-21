@@ -17,9 +17,9 @@ class StudentService {
         return [];
       }
     } catch (e) {
-      print('Error fetching students: $e');
-      return [];
     }
+     return [];
+
   }
 
   Future<bool> deleteStudent(int id) async {
@@ -34,8 +34,9 @@ class StudentService {
         return false;
       }
     } catch (e) {
-      return false;
     }
+    return false;
+
   }
 
   Future<StudentsModel?> addStudent(StudentsModel student) async {
@@ -55,7 +56,8 @@ class StudentService {
         return null;
       }
     } catch (e) {
-      return null;
     }
+     return null;
+    
   }
 }

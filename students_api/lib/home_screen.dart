@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final updated = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => StudentDetailScreen(student: student),
+        builder: (context) => StudentDetailScreen(student: student, rank: index +1,),
       ),
     );
 

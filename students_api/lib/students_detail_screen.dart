@@ -3,8 +3,13 @@ import 'package:students_api/model/student_model.dart';
 
 class StudentDetailScreen extends StatelessWidget {
   final StudentsModel student;
+  final int rank;
 
-  const StudentDetailScreen({super.key, required this.student});
+  const StudentDetailScreen({
+    super.key,
+    required this.student,
+    required this.rank,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +24,25 @@ class StudentDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: Text(
-                student.name,
-                style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    student.name,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Rank: $rank',
+                    style: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 20),
