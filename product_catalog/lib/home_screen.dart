@@ -174,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color:
                                 product.stock < 50
                                     ? Colors.orange.shade100
+                                   
                                     : Colors.green.shade100,
                             borderRadius: BorderRadius.circular(12),
                           ),
