@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:product_catalog/model/product_model.dart';
+import 'package:product_catalog/service/api_service.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Product product;
@@ -11,6 +12,15 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  late Future<List<Review>> _reviewsFuture;
+  final ApiService _apiService = ApiService();
+
+  @override
+  void initState() {
+    super.initState();
+    _reviewsFuture = _apiService.fetchReviews(widget.product.id);
+  }
+
   List<String> getProductTags(Product product) {
     final tags = <String>[];
     if (product.category != null) tags.add(product.category!);
@@ -128,7 +138,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Text(product.description, style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 16),
             const Text(
-              "Tag",
+              "Tags",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
@@ -142,9 +152,118 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     );
                   }).toList(),
             ),
+            const SizedBox(height: 16),
+            const Text(
+              "Product Information",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Table(
+              children: [
+                _buildTableRow("SKU", product.sku),
+                _buildTableRow("Category", product.category),
+                _buildTableRow("Stock", "${product.stock} units"),
+                _buildTableRow("Weight", "${product.weight} oz"),
+                _buildTableRow("Dimensions", product.dimensions?.toString()),
+                _buildTableRow("Warranty", product.warrantyInformation),
+                _buildTableRow("Shipping", product.shippingInformation),
+                _buildTableRow("Return Policy", product.returnPolicy),
+              ],
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              'Reviews',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            FutureBuilder<List<Review>>(
+              future: _reviewsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (snapshot.data!.isEmpty) {
+                  return const Text('No reviews yet.');
+                } else {
+                  return Column(
+                    children:
+                        snapshot.data!.map((review) {
+                          return Card(
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        review.reviewerName,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        '${review.date.month}/${review.date.day}/${review.date.year}',
+                                        style: const TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: List.generate(5, (index) {
+                                      return Icon(
+                                        index < review.rating
+                                            ? Icons.star
+                                            : Icons.star_border,
+                                        color: Colors.amber,
+                                        size: 18,
+                                      );
+                                    }),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(review.comment),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                  );
+                }
+              },
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+TableRow _buildTableRow(String label, String? value) {
+  return TableRow(
+    children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+            ),
+            Text(
+              value ?? "-",
+              style: const TextStyle(fontSize: 14, color: Colors.black87),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
 }
