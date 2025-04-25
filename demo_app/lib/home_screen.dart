@@ -1,3 +1,4 @@
+import 'package:demo_app/model/triangle.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,9 +10,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   double area = 0;
+  List<Triangle> history = [];
 
-  final TextEditingController heightController = TextEditingController();
-  final TextEditingController widthController = TextEditingController();
+  final heightController = TextEditingController();
+  final widthController = TextEditingController();
 
   void calculateArea() {
     final heigthStr = heightController.text.trim();
@@ -20,9 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final width = double.tryParse(widthStr) ?? 0;
 
     area = 1 / 2 * height * width;
-    setState(() {
-      
-    });
+    final triangle = Triangle(height: height, width: width, area: area);
+    history.add(triangle);
+    setState(() {});
   }
 
   @override
@@ -32,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(24.0),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 32,
             children: [
               const Center(child: Text('▲', style: TextStyle(fontSize: 132))),
@@ -57,11 +60,20 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 14),
               Text(
-                'Area Of Triangle: \n $area',
-                style: TextStyle(fontSize: 24),
+                'Area Of Triangle: $area',
+                style: TextStyle(fontSize: 18),
                 maxLines: 2,
               ),
-
+              SizedBox(height: 4),
+              Text('History: ', style: TextStyle(fontSize: 18)),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: history.length,
+                itemBuilder: (context, index) {
+                  final triangle = history[index];
+                  return Text('height:${triangle.height}, width: ${triangle.width}, area: ${triangle.area} ');
+                },
+              ),
               ElevatedButton(
                 onPressed: calculateArea,
                 child: const Text('Calculate Area'),
