@@ -23,6 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
     area = 1 / 2 * height * width;
     final triangle = Triangle(height: height, width: width, area: area);
+  
+    if (history.length >= 5) {
+      history.removeAt(0);
+    }
+
     history.add(triangle);
     setState(() {});
   }
@@ -71,7 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: history.length,
                 itemBuilder: (context, index) {
                   final triangle = history[index];
-                  return Text('height:${triangle.height}, width: ${triangle.width}, area: ${triangle.area} ');
+                  return Text(
+                    'height:${triangle.height}, width: ${triangle.width}, area: ${triangle.area} ',
+                  );
                 },
               ),
               ElevatedButton(
