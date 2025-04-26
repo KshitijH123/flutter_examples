@@ -1,10 +1,9 @@
-import 'dart:ffi';
 
 class Todo {
   final int userId;
   final int id;
   final String title;
-  final Bool completed;
+  final bool completed;
 
   Todo({
     required this.userId,
