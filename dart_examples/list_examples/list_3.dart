@@ -19,6 +19,5 @@ void main() {
       break;
     }
   }
-
-  print(number);
+ print(number);
 }
