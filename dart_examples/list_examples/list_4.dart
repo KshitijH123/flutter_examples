@@ -8,3 +8,12 @@
 
 //   print(number);
 // }
+
+void main() {
+  final list = List.generate(100, (index) => index + 1);
+  for (int i = 0; i < list.length; i++) {
+    if (list[i] % 4 == 0) {
+      print(list[i]);
+    }
+  }
+}
