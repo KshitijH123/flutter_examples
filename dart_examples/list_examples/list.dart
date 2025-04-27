@@ -30,10 +30,20 @@
 // geneare list of 100 and print items divisible by 4
 // geneare list of 10 and print there squares
 
+// void main() {
+//   final list = List.generate(10, (index) => index + 1);
+
+//   for (int i = 0; i < list.length;i++) {
+//     print('${list[i] * list[i]}');
+//   }
+// }
+
 void main() {
   final list = List.generate(10, (index) => index + 1);
+  final number = [];
 
-  for (int i = 0; i < list.length;i++) {
-    print('${list[i] * list[i]}');
+  for (int i = 0; i < list.length; i++) {
+    number.add(list[i] * list[i]);
   }
+  print(number);
 }
