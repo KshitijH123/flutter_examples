@@ -7,7 +7,7 @@ class ApiService {
   
   Future <List<Product>> fetchProduct() async{
     try{
-      final responce = await http.get (Uri.parse(baseUrl));
+      final responce = await http.get(Uri.parse(baseUrl));
 
       if (responce.statusCode == 200){
         final jsonData = json.decode(responce.body);
