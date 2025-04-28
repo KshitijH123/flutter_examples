@@ -7,11 +7,11 @@ class ApiService {
   static final instance = ApiService._();
   ApiService._();
 
-  Future<List<Post>> fetchPost() async {
+  Future<List<Post>> fetchPosts() async {
     final url = Uri.parse('https://jsonplaceholder.typicode.com/posts');
     final responce = await http.get(url);
 
-    if (responce.statusCode == 0) {
+    if (responce.statusCode == 200) {
       final jsonData = jsonDecode(responce.body);
       final list = jsonData.map((json) => Post.fromJson(json)).toList();
       return list.cast<Post>();

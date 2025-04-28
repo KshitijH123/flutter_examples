@@ -15,7 +15,7 @@ class Post {
     return Post(
       userId: json['userId'] as int,
       id: json['id']as int,
-      title: json['json'] as String,
+      title: json['title'] as String,
       body: json['body'] as String,
     );
   }
