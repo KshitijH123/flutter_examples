@@ -38,12 +38,15 @@
 //   }
 // }
 
-void main() {
-  final list = List.generate(10, (index) => index + 1);
-  final number = [];
+// void main() {
 
-  for (int i = 0; i < list.length; i++) {
-    number.add(list[i] * list[i]);
-  }
-  print(number);
-}
+//   final list = List.generate(10, (index) => index + 1);
+//   final number = [];
+
+//   for (int i = 0; i < list.length; i++) {
+//     number.add(list[i] * list[i]);
+//   }
+
+//   print(number);
+
+// }
