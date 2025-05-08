@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_demo/provider/todo_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,12 +10,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  final List<Map<String, String>> todos = [];
-
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descController = TextEditingController();
 
-  void addTodo() {
+  void addTodoDialog(BuildContext context) {
     showDialog(
       context: context,
       builder:
@@ -45,12 +45,10 @@ class HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   if (titleController.text.isNotEmpty &&
                       descController.text.isNotEmpty) {
-                    setState(() {
-                      todos.add({
-                        "title": titleController.text,
-                        "desc": descController.text,
-                      });
-                    });
+                    Provider.of<TodoProvider>(
+                      context,
+                      listen: false,
+                    ).addTodo(titleController.text, descController.text);
                     titleController.clear();
                     descController.clear();
                     Navigator.pop(context);
@@ -63,35 +61,36 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void deleteTodo(int index) {
-    setState(() {
-      todos.removeAt(index);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Simple Todo List")),
-      body: ListView.builder(
-        itemCount: todos.length,
-        itemBuilder: (context, index) {
-          final todo = todos[index];
-          return Card(
-            margin: EdgeInsets.all(8),
-            child: ListTile(
-              title: Text(todo['title']!),
-              subtitle: Text(todo['desc']!),
-              trailing: IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () => deleteTodo(index),
-              ),
-            ),
+      appBar: AppBar(title: Text("Simple Todo List", style:TextStyle(fontWeight: FontWeight.bold),),
+      centerTitle: true,
+      elevation: 2,
+      ),
+      body: Consumer<TodoProvider>(
+        builder: (context, provider, child) {
+          return ListView.builder(
+            itemCount: provider.todos.length,
+            itemBuilder: (context, index) {
+              final todo = provider.todos[index];
+              return Card(
+                margin: EdgeInsets.all(8),
+                child: ListTile(
+                  title: Text(todo['title']!),
+                  subtitle: Text(todo['desc']!),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () => provider.deleteTodo(index),
+                  ),
+                ),
+              );
+            },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: addTodo,
+        onPressed: () => addTodoDialog(context),
         child: Icon(Icons.add),
       ),
     );
