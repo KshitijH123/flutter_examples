@@ -1,3 +1,4 @@
+import 'package:demo2_flutter/counter_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: BoxConstraints(minWidth: 100, minHeight: 100),
+          constraints: BoxConstraints(minWidth: 150, minHeight: 150),
           child: Container(
             color: Colors.blue,
             padding: EdgeInsets.all(16),
@@ -27,6 +28,10 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CounterScreen()),
+                    );
                   },
                   child: Text('Click Me'),
                 ),
