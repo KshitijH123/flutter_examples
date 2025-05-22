@@ -18,10 +18,10 @@ class ApiServices {
         final List<dynamic> recipesJson = data['recipes'];
         return recipesJson.map((json) => RecipeModel.fromJson(json)).toList();
       } else {
-        throw Exception('Failed to load recipes');
+        throw ('Failed to load recipes');
       }
     } catch (e) {
-      throw Exception('Error fetching recipes: $e');
+      throw ('Error fetching recipes: $e');
     } 
   }
 }

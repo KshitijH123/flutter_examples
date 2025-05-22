@@ -37,8 +37,7 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
             return ListView.builder(
               itemCount: recipes.length,
               itemBuilder: (context, index) {
-                final recipe = recipes[index];
-                
+                final recipe = recipes[index];            
                 return Card(
                   child: ListTile(
                     leading: Image.network(

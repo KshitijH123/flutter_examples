@@ -16,10 +16,8 @@ class StudentService {
         print('Failed to load students. Status code: ${response.statusCode}');
         return [];
       }
-    } catch (e) {
-    }
-     return [];
-
+    } catch (e) {}
+    return [];
   }
 
   Future<bool> deleteStudent(int id) async {
@@ -33,10 +31,8 @@ class StudentService {
         print('Failed to delete student. Status code: ${response.statusCode}');
         return false;
       }
-    } catch (e) {
-    }
+    } catch (e) {}
     return false;
-
   }
 
   Future<StudentsModel?> addStudent(StudentsModel student) async {
@@ -55,9 +51,7 @@ class StudentService {
         print('Failed to add student. Status code: ${response.statusCode}');
         return null;
       }
-    } catch (e) {
-    }
-     return null;
-    
+    } catch (e) {}
+    return null;
   }
 }

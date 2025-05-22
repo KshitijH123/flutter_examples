@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:students_api/model/student_model.dart';
 import 'package:students_api/service/api_service.dart';
-import 'package:students_api/students_detail_screen.dart';
-import 'package:students_api/students_marks_screen.dart';
+import 'package:students_api/screens/students_detail_screen.dart';
+import 'package:students_api/screens/students_marks_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void _editStudent(int index, StudentsModel student) async {
+  void _studentDetail(int index, StudentsModel student) async {
     final updated = await Navigator.push(
       context,
       MaterialPageRoute(
@@ -56,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
+  // void _editStudent(){
 
+  // }
   void _confirmDelete(int index) async {
     final student = students[index];
 
@@ -177,6 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: ListTile(
+            onTap: () => _studentDetail(index, student),
             leading: Text(
               '${index + 1}',
               style: const TextStyle(
@@ -202,10 +205,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.edit, color: Colors.blue),
-                  onPressed: () => _editStudent(index, student),
+                  iconSize: 22,
+                  onPressed: ()=> _studentDetail(index, student),
                 ),
+                
                 IconButton(
                   icon: const Icon(Icons.delete, color: Colors.red),
+                  iconSize: 22,
                   onPressed: () => _confirmDelete(index),
                 ),
               ],

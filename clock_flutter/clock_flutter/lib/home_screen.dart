@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Center(
                   child: StreamBuilder(
                     stream: Stream.periodic(const Duration(seconds: 1)),
-                    builder: (context, snapshot) {
+                    builder: (context, snapshot) {                                   
                       return Text(
                         DateTime.now().minute.toString().padLeft(2, '0'),
                         style: const TextStyle(

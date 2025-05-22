@@ -32,7 +32,7 @@ class RecipeDetail extends StatelessWidget {
             ),
             Row(
               children: [
-                Icon(Icons.star, color: Colors.yellowAccent),
+                Icon(Icons.star, color: Colors.yellow),
                 Text(
                   '${recipe.rating} (${recipe.reviewCount} reviews)',
                   style: const TextStyle(fontSize: 16),
