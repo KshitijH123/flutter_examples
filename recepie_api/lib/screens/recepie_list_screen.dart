@@ -1,15 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:recepie_api/model/recepie_model.dart';
+import 'package:recepie_api/services/api_services.dart';
 
-class RecepieListScreen extends StatefulWidget {
-  const RecepieListScreen({super.key});
+
+class RecipeListScreen extends StatefulWidget {
+  const RecipeListScreen({super.key});
 
   @override
-  State<RecepieListScreen> createState() => _RecepieListScreenState();
+  State<RecipeListScreen> createState() => _RecipeListScreenState();
 }
 
-class _RecepieListScreenState extends State<RecepieListScreen> {
+class _RecipeListScreenState extends State<RecipeListScreen> {
+  late Future<List<RecipeModel>> recipeFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    recipeFuture = ApiServices.instance.fetchRecipes();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(title: const Text('Recipes')),
+      body: FutureBuilder(
+        future: recipeFuture,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.data == null) {
+            return const Center(child: Text('No recipes available.'));
+          } else {
+            final recipes = snapshot.data!;
+
+            return ListView.builder(
+              itemCount: recipes.length,
+              itemBuilder: (context, index) {
+                final recipe = recipes[index];
+                return Card(
+                  child: ListTile(
+                    leading: Image.network(
+                      recipe.image,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                    title: Text(recipe.name),
+                    subtitle: Text(' ${recipe.cuisine} -${recipe.difficulty}'),
+                    onTap: () {},
+                  ),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 }
