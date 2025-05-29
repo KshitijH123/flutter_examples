@@ -30,6 +30,30 @@ class RecipeDetail extends StatelessWidget {
               'Cuisine: ${recipe.cuisine}',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
+            Row(
+              children: [
+                Icon(Icons.star, color: Colors.yellow),
+                Text(
+                  '${recipe.rating} (${recipe.reviewCount} reviews)',
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+            Text(
+              'Ingredients (${recipe.ingredients.length}):',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+            ...recipe.ingredients.map((ingredient) => Text('- $ingredient')),
+            Text(
+              'Instructions:',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+            ...recipe.instructions.map(
+              (step) => Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Text('~ $step'),
+              ),
+            ),
           ],
         ),
       ),
