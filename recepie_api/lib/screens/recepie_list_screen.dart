@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recepie_api/model/recepie_model.dart';
+import 'package:recepie_api/screens/recepie_detail_screen.dart';
 import 'package:recepie_api/services/api_services.dart';
 
 
@@ -48,7 +49,13 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
                     ),
                     title: Text(recipe.name),
                     subtitle: Text(' ${recipe.cuisine} -${recipe.difficulty}'),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => RecipeDetail(recipe: recipe),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
