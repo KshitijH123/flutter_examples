@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:practice_app/home_screen.dart';
+import 'package:practice_app/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen>
     await Future.delayed(const Duration(seconds: 8));
     if (mounted) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) =>  LoginScreen()),
       );
     }
   }
@@ -160,7 +160,6 @@ class _SplashScreenState extends State<SplashScreen>
 
                         const SizedBox(height: 60),
 
-                        // Loading indicator
                         SizedBox(
                           width: 40,
                           height: 40,
