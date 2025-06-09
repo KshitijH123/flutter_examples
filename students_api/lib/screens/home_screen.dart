@@ -56,9 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
-  // void _editStudent(){
-
-  // }
   void _confirmDelete(int index) async {
     final student = students[index];
 
