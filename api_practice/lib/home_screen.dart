@@ -21,8 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Quotes",style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold),),
-      elevation: 2,
+      appBar: AppBar(
+        title: Text(
+          "Quotes",
+          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+        ),
+        elevation: 2,
       ),
       body: FutureBuilder<List<Quote>?>(
         future: quoteFuture,
@@ -42,14 +46,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 final quote = quotes[index];
 
                 return Card(
-                  margin: const EdgeInsets.all(8.0),
+                  margin: const EdgeInsets.all(12.0),
                   shadowColor: Colors.blueGrey,
+                  elevation: 6,
                   child: ListTile(
                     title: Text(
                       quote.quote,
-                      style: const TextStyle(fontStyle: FontStyle.italic),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                      ),
                     ),
-                    subtitle: Text('- ${quote.author}'),
+                    subtitle: Text('~ ${quote.author}'),
                   ),
                 );
               },
