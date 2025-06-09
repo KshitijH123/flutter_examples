@@ -9,19 +9,14 @@ class ApiServices {
 
   final recipeUrl = 'https://dummyjson.com/recipes';
 
-  Future<List<RecipeModel>> fetchRecipes() async {
-    try {
-      final response = await http.get(Uri.parse(recipeUrl));
+  Future<List<RecipeModel>?> fetchRecipes() async {
+    final response = await http.get(Uri.parse(recipeUrl));
 
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        final List<dynamic> recipesJson = data['recipes'];
-        return recipesJson.map((json) => RecipeModel.fromJson(json)).toList();
-      } else {
-        throw ('Failed to load recipes');
-      }
-    } catch (e) {
-      throw ('Error fetching recipes: $e');
-    } 
-  }
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List<dynamic> recipesJson = data['recipes'];
+      return recipesJson.map((json) => RecipeModel.fromJson(json)).toList();
+    }
+    return null;
+  } 
 }

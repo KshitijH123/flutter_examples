@@ -11,7 +11,7 @@ class RecipeListScreen extends StatefulWidget {
 }
 
 class _RecipeListScreenState extends State<RecipeListScreen> {
-  late Future<List<RecipeModel>> recipeFuture;
+  late Future<List<RecipeModel>?> recipeFuture;
 
   @override
   void initState() {
