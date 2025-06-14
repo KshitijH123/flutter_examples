@@ -7,10 +7,14 @@ class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
-
+ 
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  void login(String email,password){
+ 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +55,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 32),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                login( emailController.text.toString(),
+                  passwordController );
+                },
                 child: Text('Login', style: TextStyle(fontSize: 22)),
                 style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity,48),
+                  minimumSize: Size(double.infinity, 48),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
                   ),
