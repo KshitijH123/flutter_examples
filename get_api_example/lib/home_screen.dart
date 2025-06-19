@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontStyle: FontStyle.italic,
                       ),
                     ),
-                    subtitle: Text('~ ${quote.author}'),
+                    subtitle: Text('~ ${quote.author}',style: TextStyle(color: Colors.deepOrangeAccent),),
                   ),
                 );
               },
