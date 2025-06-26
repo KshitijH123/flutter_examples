@@ -66,9 +66,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildProductCard(Product product) {
+   Widget _buildProductCard(Product product) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         child: Container(
@@ -113,7 +114,76 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    
+                    Text(
+                      product.brand ?? '',
+                      style: const TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Text(
+                          '\$${product.price}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                            fontSize: 15,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          '-${product.discountPercentage}%',
+                          style: const TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                              size: 16,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              product.rating.toString(),
+                              style: const TextStyle(fontSize: 13),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color:
+                                product.stock < 50
+                                    ? Colors.orange.shade100
+                                    : Colors.green.shade100,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            product.stock < 50 ? "Low Stock" : "In Stock",
+                            style: TextStyle(
+                              color:
+                                  product.stock < 50
+                                      ? Colors.orange
+                                      : Colors.green,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
