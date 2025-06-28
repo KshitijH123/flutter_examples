@@ -1,4 +1,5 @@
 import 'package:demo_flutter/model/model.dart';
+import 'package:demo_flutter/product_detail_screen.dart';
 import 'package:demo_flutter/service/api_services.dart';
 import 'package:flutter/material.dart';
 
@@ -69,6 +70,12 @@ class _HomePageState extends State<HomePage> {
    Widget _buildProductCard(Product product) {
     return GestureDetector(
       onTap: () {
+          Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ProductDetailScreen(product: product),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
