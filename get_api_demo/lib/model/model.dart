@@ -1,11 +1,11 @@
-class product {
+class ProductModel {
   String? slug;
   String? name;
   String? url;
 
-  product({this.slug, this.name, this.url});
+  ProductModel({this.slug, this.name, this.url});
 
-  product.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJson(Map<String, dynamic> json) {
     slug = json['slug'];
     name = json['name'];
     url = json['url'];
