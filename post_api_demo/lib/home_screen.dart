@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Posts')),
       body: FutureBuilder<List<PostModel>>(
@@ -27,12 +27,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
           final posts = snapshot.data!;
           return ListView.builder(
+            padding: const EdgeInsets.all(8),
             itemCount: posts.length,
             itemBuilder: (context, index) {
               final post = posts[index];
-              return ListTile(
-                title: Text(post.title ?? ''),
-                subtitle: Text(post.body ?? ''),
+              return Card(
+                elevation: 3,
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        post.title ?? '',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        post.body ?? '',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ),
               );
             },
           );
