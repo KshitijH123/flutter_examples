@@ -8,7 +8,7 @@ class ApiService {
 
   static final ApiService instance = ApiService._();
 
-  static const String baseUrl = 'https://jsonplaceholder.typicode.com/posts';
+  static  String baseUrl = 'https://jsonplaceholder.typicode.com/posts';
 
   Future<List<PostModel>> fetchModel() async {
     final response = await http.get(Uri.parse(baseUrl));
