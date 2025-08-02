@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fort_demo/home_screen.dart';
+import 'package:recepie_app_demo/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: const HomeScreen(),

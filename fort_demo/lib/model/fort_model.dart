@@ -12,7 +12,7 @@ class FortModel {
     required this.distance,
     required this.images,
   });
-  
+
   factory FortModel.fromJson(Map<String, dynamic> json) {
     return FortModel(
       id: json['id'],
