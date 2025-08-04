@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart'; // Make sure to import this if it's in a separate file
+import 'package:login_form/screens/register_screen.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -73,6 +74,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   child: const Text('Login', style: TextStyle(fontSize: 24)),
+                ),
+              ),
+              SizedBox(height: 8),
+              SizedBox(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RegisterScreen()),
+                    );
+                  },
+                  child: Text('Register', style: TextStyle(fontSize: 16)),
                 ),
               ),
             ],

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, required this.username});
+  final String username;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -9,18 +10,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Login Page',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-        ),
-        centerTitle: true,
-        elevation: 3,
-      ),
+      appBar: AppBar(title: const Text('Home Page'), centerTitle: true),
       body: Center(
-        child:TextField(decoration: InputDecoration(),),
+        child: Text(
+          'Welcome, ${widget.username}!',
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
