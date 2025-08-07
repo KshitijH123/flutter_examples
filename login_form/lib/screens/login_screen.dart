@@ -17,17 +17,32 @@ class _LoginScreenState extends State<LoginScreen> {
     String name = nameController.text.trim();
     String password = passwordController.text.trim();
 
-    if (name.isNotEmpty && password.isNotEmpty) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen(username: name)),
-      );
-    } else {
+    final passwordRegExp = RegExp(r'^(?=.*[0-9])(?=.*[!@#\$&*~])(?=.{8,16}$)');
+
+    if (name.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Please enter both fields')));
+      return;
     }
+
+    if (!passwordRegExp.hasMatch(password)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Password must be 8-16 characters,\ninclude at least 1 number and 1 special character (!@#\$&*~)',
+          ),
+        ),
+      );
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen(username: name)),
+    );
   }
+
 
   @override
   Widget build(BuildContext context) {
