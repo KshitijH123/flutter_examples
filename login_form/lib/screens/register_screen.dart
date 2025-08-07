@@ -15,6 +15,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
+  void register() {
+    String password = passwordController.text.trim();
+    String confirmPassword = confirmPasswordController.text.trim();
+
+    final passwordRegExp = RegExp(r'^(?=.*[0-9])(?=.*[!@#\$&*~])(?=.{8,16}$)');
+
+    if (!passwordRegExp.hasMatch(password)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Password must be 8–16 characters,\ninclude at least 1 number and 1 special character (!@#\$&*~)',
+          ),
+        ),
+      );
+      return;
+    }
+
+    if (password != confirmPassword) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Passwords do not match')));
+      return;
+    }
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Registration Successful')));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 16),
                 TextField(
+                  keyboardType: TextInputType.numberWithOptions(),
                   controller: ageController,
                   decoration: const InputDecoration(
                     labelText: 'Age',
@@ -78,17 +108,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                 SizedBox(
+                SizedBox(
                   width: double.infinity,
-                  height:   44,
+                  height: 44,
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegisterScreen(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: const Text('Confirm User', style: TextStyle(fontSize: 22)),
+                    child: const Text(
+                      'Confirm User',
+                      style: TextStyle(fontSize: 22),
+                    ),
                   ),
                 ),
               ],
