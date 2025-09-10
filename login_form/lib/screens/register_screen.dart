@@ -25,7 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            'Password must be 8–16 characters,\ninclude at least 1 number and 1 special character (!@#\$&*~)',
+            'Password must be 8-16 characters,\ninclude at least 1 number and 1 special character (!@#\$&*~)',
           ),
         ),
       );
