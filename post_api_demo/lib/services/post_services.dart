@@ -16,6 +16,6 @@ class PostService {
       return jsonData.map((json) => PostModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load posts');
-    }
+    } 
   }
 }
