@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_demo_api/home_screen.dart';
+import 'package:login_demo_api/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,10 +14,9 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
 
   void login() {
-    String name = nameController.text.trim();
-    String password = passwordController.text.trim();
-
-    if (password == 'Kshitij@123' && name == 'Kshitij123') {
+    final name = nameController.text.trim();
+    final password = passwordController.text.trim();
+    if (name == 'Kshitij' && password == '1234') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen(username: name)),
@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Login Failed')));
+      ).showSnackBar(SnackBar(content: Text('Login failed')));
     }
   }
 
@@ -32,34 +32,82 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Screen'),
-        centerTitle: true,
+        backgroundColor: Colors.red[300],
+        title: Text(
+          'Login Screen',
+          style: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.w600,
+            color: Colors.white70,
+          ),
+        ),
         elevation: 2,
+        centerTitle: true,
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 24,
-            children: [
-              TextField(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
                 controller: nameController,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   hintText: 'User Name',
-                  border: OutlineInputBorder(),
                 ),
               ),
-              TextField(
+            ),
+            SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
                 controller: passwordController,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   hintText: 'Password',
-                  border: OutlineInputBorder(),
                 ),
               ),
-              ElevatedButton(onPressed: login, child: Text('Login')),
-            ],
-          ),
+            ),
+            SizedBox(height: 24),
+            SizedBox(
+              height: 48,
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red[300],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    ),
+                  ),
+                  onPressed: login,
+                  child: Text(
+                    'Login',
+                    style: TextStyle(fontSize: 20, color: Colors.white54),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 8),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegisterScreen()),
+                );
+              },
+              child: Text(
+                'Register User',
+                style: TextStyle(fontSize: 16, color: Colors.red),
+              ),
+            ),
+          ],
         ),
       ),
     );
