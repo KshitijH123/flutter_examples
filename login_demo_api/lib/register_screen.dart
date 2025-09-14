@@ -89,6 +89,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: 'Confirm Password',
                   ),
                 ),
+                SizedBox(height: 24),
+                SizedBox(
+                  height: 48,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red[300],
+                      shape: ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Confirm Registration',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white54,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
