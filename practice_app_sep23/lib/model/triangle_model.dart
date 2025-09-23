@@ -3,5 +3,9 @@ class TriangleModel {
   double width;
   double area;
 
-  TriangleModel(this.height, this.width, this.area);
+  TriangleModel(
+    this.height, 
+    this.width, 
+    this.area
+  );
 }

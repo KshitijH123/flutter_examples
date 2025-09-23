@@ -41,7 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Triangle Area Calculator"),
+        title: const Text("Triangle Area Calculator",
+        style: TextStyle(fontSize: 22,fontWeight:FontWeight.w500),
+        ),
         centerTitle: true,
         elevation: 2,
       ),
