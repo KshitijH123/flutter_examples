@@ -1,6 +1,9 @@
 void main() {
   Kshitij kshitij = Kshitij();
 
+  String j = ('Kshitiij');
+  print(j.toUpperCase());
+
   int result = kshitij.hundredthMultiple(2);
   print(result);
 
