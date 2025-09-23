@@ -1,15 +1,19 @@
 void main() {
-  int result = (hundredthMultiple(2));
+  Kshitij kshitij = Kshitij();
+
+  int result = kshitij.hundredthMultiple(2);
   print(result);
 
-  String sResult = (stringPlusHello('Kshitij'));
+  String sResult = kshitij.stringPlusHello('Kshitij');
   print(sResult);
 }
 
-int hundredthMultiple(int n) {
-  return n * 100;
-}
+class Kshitij {
+  int hundredthMultiple(int n) {
+    return n * 100;
+  }
 
-String stringPlusHello(String j) {
-  return j + " Hello!";
+  String stringPlusHello(String j) {
+    return j + " Hello!";
+  }
 }
