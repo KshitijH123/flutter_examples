@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key, required this.name, required this.gmail});
   final String name;
-  final String gmail;
+  final String gmail; 
 
   Future<void> logout(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
